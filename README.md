@@ -1,16 +1,16 @@
-Tune-In
+**Tune-In**
 
 Get daily update of what happened in music history.
 
-Project Overview
+**Project Overview**
 
 A pop-up or web app that will have an album cover that will display to the user.  When the user uses the mouse cursor to click on the album cover, the album will flip sides and display information about events in music history from that day; musician's birthdays from that day; and No. 1 songs from that day.  
 This webp app will target music buffs and allow them to increase their daily knowledge of music history, help them in trivia games, and help them feel smarter when they spout of that knowledge in random social settings.  
 This web app will be built with django using css, api's, and admin panel.   
 
-Functionality
+**Functionality**
 
-
+Tune In
 
 Your proposal must be in a markdown .md file more info
 Your proposal must set specific and attainable goals
