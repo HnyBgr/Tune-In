@@ -24,14 +24,14 @@ This web app will be built with django using html, css, api's, and admin panel.
 **Schedule**
 
 - Week 1
-    [] model out web app in sketch format
-    [] create django project
-    [] find API's for data needed
-    [] start django project with code
+    [ ] model out web app in sketch format
+    [ ] create django project
+    [ ] find API's for data needed
+    [ ] start django project with code
 
 - Week 2
-    [] ensure API's are functional
-    [] input fields are functional 
+    [ ] ensure API's are functional
+    [ ] input fields are functional 
 
 - Week 3
-    [] styling using bootstrap or materialize
+    [ ] styling using bootstrap or materialize
