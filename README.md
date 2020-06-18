@@ -33,5 +33,5 @@ This web app will be built with django using html, css, api's, and admin panel.
     [] ensure API's are functional
     [] input fields are functional 
 
--Week 3
+- Week 3
     [] styling using bootstrap or materialize
