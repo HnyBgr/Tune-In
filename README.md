@@ -39,3 +39,9 @@ This web app will be built with django using html, css, api's, and admin panel.
 
 - Week 3
     - [] styling using bootstrap or materialize
+
+Milestone 1:
+    - [] get data and display data
+
+Milestone 2:
+    - [] music and animation
