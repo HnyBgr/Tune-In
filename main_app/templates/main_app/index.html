@@ -6,6 +6,8 @@
     <title>Tune-In</title>
 </head>
 <body>
-    <h1>Rock N Roll</h1>
+    {% for this_day in MusicInfo%}
+    <h1>{{this_day.name}}</h1>
+    {% endfor%}
 </body>
 </html>

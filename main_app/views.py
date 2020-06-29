@@ -3,7 +3,9 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    context = {
-        'message': 'Rock N Roll'
-    }
-    return render(request, 'main_app/index.html', context)
+        this_day = MusicInfo.objects.order_by('name')
+        context = {
+            'message': 'Rock N Roll',
+            'this_day': this_day
+        }
+        return render(request, 'main_app/index.html', context)
