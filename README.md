@@ -25,10 +25,10 @@ This web app will be built with django using html, css, api's, and admin panel.
 
 - Week 1
     - [ ] model out web app in sketch format
-    - [ ] create django project
+    - [x] create django project
     - [ ] find API's for data needed
-    - [ ] start django project with code
-    - [ ] get data and display data on page
+    - [x] start django project with code
+    - [x] get data and display data on page
   
 
 - Week 2
