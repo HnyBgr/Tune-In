@@ -8,16 +8,18 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     {% load static %}
-    <link rel="shortcut icon" type="image/ico" href="{% static 'tune_in/img/favicon.ico' %}">
+    <link rel="shortcut icon" type="image/ico" href="{% static "tune_in/img/favicon.ico" %}">
     <title>Tune-In</title>
     <style>
+        body {
+            margin: 10px;
+            padding: 5px;
+        }
         .container-fluid {
             display: flex;
             margin: 10px;
             padding: 5px;
         }
-        
-
         .album_pin {
             vertical-align: middle;
             width: 50px;
@@ -26,30 +28,102 @@
             margin: 5 px;
             padding: 5px;
         }
+        .dropdown-menu {
+            height: 200px;
+            overflow-y: auto;
+        }
     </style>
 </head>
 
 
 <body>
-    <div class='container-fluid'>
-        <div class='tim_info_'>
+    <div class="container-fluid">
+        <div class="tim_info_">
             {% for td in this_day%}
-            <div class='tim_title_info'></div>
-            <span class='tim_year'>
+            <div class="tim_title_info"></div>
+            <span class="tim_year">
                 <b>{{td.date.year}}</b>
             </span>
             <span><b> - </b></span>
-            <span class='tim_artist'>
+            <span class="tim_artist">
                 <b>{{td.name}}</b>
             </span>
         </div>
     </div>
     <div>
-        <img class='album_pin' alt="Avatar" src="{% static 'tune_in/img/rz.jpg' %}">
+        <img class="album_pin" alt="Avatar" src="{% static 'tune_in/img/rz.jpg' %}">
     </div>
-    <p>{{td.body}}</p>
-    {% endfor%}
+    <div>
+        <p>{{td.body}}</p>
+        {% endfor%}
     </div>
+    <div class="row">
+        <div class="tim_day">
+            <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuButton"
+                data-toggle="dropdown">
+                Day
+            </button>
+            <div class="dropdown-menu scrollable-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">1</a>
+                <a class="dropdown-item" href="#">2</a>
+                <a class="dropdown-item" href="#">3</a>
+                <a class="dropdown-item" href="#">4</a>
+                <a class="dropdown-item" href="#">5</a>
+                <a class="dropdown-item" href="#">6</a>
+                <a class="dropdown-item" href="#">7</a>
+                <a class="dropdown-item" href="#">8</a>
+                <a class="dropdown-item" href="#">9</a>
+                <a class="dropdown-item" href="#">10</a>
+                <a class="dropdown-item" href="#">11</a>
+                <a class="dropdown-item" href="#">12</a>
+                <a class="dropdown-item" href="#">13</a>
+                <a class="dropdown-item" href="#">14</a>
+                <a class="dropdown-item" href="#">15</a>
+                <a class="dropdown-item" href="#">16</a>
+                <a class="dropdown-item" href="#">17</a>
+                <a class="dropdown-item" href="#">18</a>
+                <a class="dropdown-item" href="#">19</a>
+                <a class="dropdown-item" href="#">20</a>
+                <a class="dropdown-item" href="#">21</a>
+                <a class="dropdown-item" href="#">22</a>
+                <a class="dropdown-item" href="#">23</a>
+                <a class="dropdown-item" href="#">24</a>
+                <a class="dropdown-item" href="#">25</a>
+                <a class="dropdown-item" href="#">26</a>
+                <a class="dropdown-item" href="#">27</a>
+                <a class="dropdown-item" href="#">28</a>
+                <a class="dropdown-item" href="#">29</a>
+                <a class="dropdown-item" href="#">30</a>
+                <a class="dropdown-item" href="#">31</a>
+            </div>
+        </div>
+        <div class="tim_month">
+            <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuButton"
+                data-toggle="dropdown">
+                Month
+            </button>
+            <div class="dropdown-menu scrollable-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Jan</a>
+                <a class="dropdown-item" href="#">Feb</a>
+                <a class="dropdown-item" href="#">Mar</a>
+                <a class="dropdown-item" href="#">Apr</a>
+                <a class="dropdown-item" href="#">May</a>
+                <a class="dropdown-item" href="#">Jun</a>
+                <a class="dropdown-item" href="#">Jul</a>
+                <a class="dropdown-item" href="#">Aug</a>
+                <a class="dropdown-item" href="#">Sep</a>
+                <a class="dropdown-item" href="#">Oct</a>
+                <a class="dropdown-item" href="#">Nov</a>
+                <a class="dropdown-item" href="#">Dec</a>
+            </div>
+        </div>
+        <div class="submit">
+            <button type="button" class="btn btn-secondary btn-sm">Search</button>
+        </div>
+    </div>
+
+
+
 
 
 
