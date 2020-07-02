@@ -16,3 +16,5 @@ def index(request):
         'this_day': this_day
     }
     return render(request, 'main_app/index.html', context)
+
+
