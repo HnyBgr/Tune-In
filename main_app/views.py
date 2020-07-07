@@ -11,10 +11,10 @@ from django.core.paginator import Paginator
 
 def index(request):
     this_day = MusicInfo.objects.order_by('artist')
-    context = {
+    data = {
         # 'message': 'Rock N Roll',
-        'this_day': this_day
+        'this_day': this_day,
     }
-    return render(request, 'main_app/index.html', context)
+    return render(request, 'main_app/index.html', data)
 
 
