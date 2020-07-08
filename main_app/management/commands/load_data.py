@@ -22,6 +22,7 @@ class Command(BaseCommand):
             month = entry['month']:
             year = entry['year']:
             artist = entry['artist']
+            description = entry['description']:
             # print(entry['artist'])
 
        

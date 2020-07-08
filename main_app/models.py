@@ -7,7 +7,7 @@ class MusicInfo(models.Model):
     day = models.DateField()
     month = models.DateField()
     year = models.DateField()
-    body = models.CharField(max_length=300)
+    description = models.CharField(max_length=300)
     image = models.ImageField()
 
     def __str__(self):
