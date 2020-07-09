@@ -9,11 +9,18 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 
-def index(request):
-    this_day = MusicInfo.objects.order_by('artist')
+def index(request, ):
+    this_day = MusicInfo.objects.order_by('day')
+
+    year = ""
+    artist = ""
+    description = ""
+
     data = {
-        # 'message': 'Rock N Roll',
-        'this_day': this_day,
+        # # 'message': 'Rock N Roll',
+        'year': year,
+        'artist': artist,
+        'description': description,
     }
     return render(request, 'main_app/index.html', data)
 
