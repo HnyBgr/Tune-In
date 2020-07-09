@@ -23,6 +23,11 @@
             background-color: burlywood;
         }
 
+        .on_this_day {
+            color: brown;
+            font-size: 12px;           
+        }
+
         .container-fluid {
             display: flex;
             margin: 10px;
@@ -48,7 +53,7 @@
 
         .row {
             margin: 2px;
-            margin-right: 2px;
+            margin-right: 2px;            
         }
 
         .btn {
@@ -135,16 +140,14 @@
                 <option value="12">Dec
                 <option>
             </select>
-
             <!-- search button -->
             <button type="submit" v-on:click="getMusicData" class="btn badge-pill btn-secondary btn-sm">Search</button>
-
         </div>
-
-        <!-- <div v-for="item in music_info">[[item.year]] - [[item.artist]]</br>
+        <!-- div with for loop over data to be displayed -->
+        
+        <div class="on_this_day" v-for="item in music_info">[[item.day]] [[item.month]] </br>[[item.year]] - [[item.artist]]</br>
             [[item.description]]
-        </div> -->
-        <!-- <div v-for="artist in music_info">[[artist.artist]]</div> -->
+        </div>
     </div>
 
 
@@ -159,9 +162,9 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- begin js code -->
     <script type="text/javascript">
-
-
+        // start of vue js
         let app = new Vue({
             el: "#app",
             delimiters: ["[[", "]]"],
@@ -175,8 +178,8 @@
             },
             methods: {
                 getMusicData: function () {
-                    console.log(this.month,":month")
-                    console.log(this.day, ":day")
+                    // console.log(this.month,":month")
+                    // console.log(this.day, ":day")
 
                     axios({
                         method: "get",
@@ -189,14 +192,21 @@
                         this.music_info = response.data
                         console.log(this.music_info)
                     })
-                    // alert('clicked!')                    
-                }
+                },
+            //     getBornData: function () {
+
+            //         axios({
+            //             method: "get",
+            //             url: `https://www.thisdayinmusic.com/wp-json/tdim/v1/bornon/${this.month}/${this.day}`,
+            //         })
+            //     // }
             },
             created: function () {
                 this.getMusicData()
             }
         })
     </script>
+    <!-- page footer -->
     <footer>
         <p>&copy 2020 Tune-In</p>
     </footer>
