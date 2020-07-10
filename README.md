@@ -32,7 +32,7 @@ This web app will be built with django using html, css, api's, and admin panel.
   
 
 - Week 2
-    - [ ] ensure API's/data source are functional
+    - [x] ensure API's/data source are functional
     - [ ] input fields are functional
     - [ ] animation for record coming out of album cover
     - [ ] music from spotify API for MP3 clips 
