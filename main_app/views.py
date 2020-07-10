@@ -9,12 +9,12 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 
-def index(request, ):
+def index(request):
     this_day = MusicInfo.objects.order_by('day')
 
-    year = ""
-    artist = ""
-    description = ""
+    year = ''
+    artist = ''
+    description = ''
 
     data = {
         # # 'message': 'Rock N Roll',
@@ -23,5 +23,22 @@ def index(request, ):
         'description': description,
     }
     return render(request, 'main_app/index.html', data)
+
+def sign_up(request):
+    if request.method == 'POST':
+
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        verify_password = request.POST['verify_password']
+
+        if password != verify_password:
+            return HttpResponse('Passwords do not match!')
+
+        user = User.objects.create_user(username, email, password)
+        return HttpResponseRedirect(reverse('main_app/index.html'))
+    
+    return render(request, 'main_app/sign_up.html' )
+
 
 

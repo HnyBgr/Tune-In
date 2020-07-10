@@ -11,20 +11,42 @@
     <link rel="shortcut icon" type="image/ico" href="{% static 'tune_in/img/favicon.ico' %}">
     <title>Tune-In</title>
     <style>
+        .hero-image {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{% static 'tune_in/banner.jpg' %}");
+            ;
+            height: 50%;
+            background-position: 50% 25%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
         h1 {
             margin: 5px;
             padding: 5px;
             text-align: center;
+            font-size: 100px;
+            text-shadow: 3px 3px darkgrey;
+        }
+
+        h2 {
+            margin: 2px;
+            padding: 5px;
+            text-align: center;
+            font-size: 30px;
+            text-shadow: 3px 3px darkgrey;
         }
 
         body {
-            margin: 10px;
+            margin: 5px;
             padding: 5px;
             background-color: burlywood;
         }
+
         /* album cover */
         .center {
             display: block;
+            margin-top: 100px;
             margin-left: auto;
             margin-right: auto;
             height: 600px;
@@ -69,8 +91,11 @@
 </head>
 
 <body>
-    <!-- page title -->
-    <h1>Tune-In</h1>
+    <div class="hero-image">
+        <!-- page title -->
+        <h1>Tune-In</h1>
+        <h2>Daily Music History</h2>
+    </div>
     <!-- album cover -->
     <img class="center" src="{% static 'tune_in/album_cover.jpg'%}">
     <!-- div for vue -->
@@ -139,6 +164,9 @@
             [[item.description]]
         </div>
     </div>
+    <div class="register">
+        <a href="{% url 'main_app:sign_up' %}">Register</a>
+    </div>
 
 
     <script src=" https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -179,8 +207,7 @@
                     axios({
                         method: "get",
                         url: `https://www.thisdayinmusic.com/wp-json/tdim/v1/otd/${this.month}/${this.day}`,
-                    }).then(response => {
-                        console.log(response.data)
+                    }).then(response => {                        
                         // console.log(response.data[1].year)
                         // console.log(response.data[1].artist)
                         // console.log(response.data[1].month)
