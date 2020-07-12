@@ -54,6 +54,11 @@
             width: 800px;
         }
 
+        .vinyl {
+            height: 600px;
+            width: 800;
+        }
+
         .on_this_day {
             color: brown;
             font-size: 12px;
@@ -109,6 +114,7 @@
     </div>
     <!-- album cover -->
     <img class="center" src="{% static 'tune_in/album_cover.jpg'%}">
+    <img class="vinyl" src="{% static 'tune_in/vinyl.jpg'%}">
     <!-- div for vue -->
     <div id="app" class="center">
         <!-- div for dropdown menus and search button -->
@@ -186,6 +192,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
     <!-- begin js code -->
     <script type="text/javascript">
         // start of vue js
@@ -217,7 +224,7 @@
                         // console.log(response.data[1].year)
                         // console.log(response.data[1].artist)
                         // console.log(response.data[1].month)
-                        // console.log(response.data[1].day)                       
+                        // console.log(response.data[1].day)
                         this.music_info = response.data.sort((a, b) => Math.random() - 0.5).slice(0, 7)
                         console.log(this.music_info)
                     })
@@ -237,6 +244,7 @@
             }
         })
     </script>
+    <script>gsap.to(".vinyl", { duration: 2, x: 300 });</script>
     <!-- page footer -->
     <footer>
         <p>&copy 2020 Tune-In</p>

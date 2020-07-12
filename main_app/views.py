@@ -3,8 +3,6 @@ from django.http import HttpResponse
 from .models import MusicInfo
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from django.db.models import Q
-from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -39,6 +37,9 @@ def sign_up(request):
         return HttpResponseRedirect(reverse('main_app/index.html'))
     
     return render(request, 'main_app/sign_up.html' )
+
+def motion(request):
+    return render(request, 'main_app/motion.html')
 
 
 
