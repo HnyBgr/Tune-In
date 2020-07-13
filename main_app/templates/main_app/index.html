@@ -48,15 +48,24 @@
         .center {
             display: block;
             margin-top: 100px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 600px;
-            width: 800px;
+            /* margin-left: auto;
+            margin-right: auto; */
+            width: 400px;
+            z-index: 1;
+            position: relative;
+
         }
 
         .vinyl {
-            height: 600px;
-            width: 800;
+            width: 400px;
+            position: absolute;
+            z-index: -1;
+
+        }
+
+        .album_vinyl {
+            width: 100%;
+            position: relative;
         }
 
         .on_this_day {
@@ -88,6 +97,13 @@
             margin-right: 2px;
         }
 
+        .top_page {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            text-align: left;
+        }
+
         footer {
             position: fixed;
             left: 0;
@@ -113,9 +129,15 @@
         <a href="{% url 'main_app:sign_up' %}">Sign Up</a>
         <a href="{% url 'main_app:login' %}">Login</a>
     </div>
-    <!-- album cover -->
-    <img class="center" src="{% static 'tune_in/album_cover.jpg'%}">
-    <img class="vinyl" src="{% static 'tune_in/vinyl.jpg'%}">
+    <div class="album_vinyl">
+        <!-- album cover -->
+        <div class="album_cover">
+            <img class="center" src="{% static 'tune_in/album_cover.jpg'%}">
+        </div>
+        <div class="vinyl">
+            <img class="vinyl_pic" src="{% static 'tune_in/vinyl_1.jpg'%}">
+        </div>
+    </div>
     <!-- div for vue -->
     <div id="app" class="center">
         <!-- div for dropdown menus and search button -->
@@ -177,10 +199,12 @@
         <!-- div with for loop over data to be displayed -->
         <div class="on_this_day" v-for="item in music_info">[[item.day]] [[item.month]] </br>[[item.year]] -
             [[item.artist]]</br>
-            [[item.description]]
+            [[item.description | striphtml]]
         </div>
     </div>
-    <a href="#top">Back to top of page</a>
+    <div class="top_page">
+        <a href="#top">Back to top of page</a>
+    </div>
 
     <script src=" https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
@@ -196,6 +220,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
     <!-- begin js code -->
     <script type="text/javascript">
+
         // start of vue js
         let app = new Vue({
             el: "#app",
@@ -213,7 +238,7 @@
                 getMusicData: function () {
                     // console.log(this.month,":month")
                     // console.log(this.day, ":day")
-                    // if statement to disable the submit button unless a day and month are selected
+                    // if statement to disable the submit button unless a day and month are selected                    
                     if (this.day === "") {
                         return
                     }
@@ -226,6 +251,7 @@
                         // console.log(response.data[1].artist)
                         // console.log(response.data[1].month)
                         // console.log(response.data[1].day)
+                        let regex = ""
                         this.music_info = response.data.sort((a, b) => Math.random() - 0.5).slice(0, 5)
                         console.log(this.music_info)
                     })
@@ -237,6 +263,13 @@
                         // console.log(response.data[1].artist)
                         this.born_info = response.data.sort((a, b) => Math.random() - 0.5).slice(0, 10)
                     })
+                    function removeTags(str) {
+                        if ((str === null) || (str === ''))
+                            return false;
+                        else
+                            str = str.toString();
+                        return str.replace(/(<([^>]+)>)/ig, '');
+                    }
                 }
             },
             created: function () {
@@ -244,6 +277,7 @@
                 // this.getBornData()
             }
         })
+
     </script>
     <script>gsap.to(".vinyl", { duration: 2, x: 1000 });</script>
     <!-- page footer -->
