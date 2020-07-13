@@ -111,6 +111,7 @@
     <!-- register hyperlink to sign-up page -->
     <div class="register">
         <a href="{% url 'main_app:sign_up' %}">Sign Up</a>
+        <a href="{% url 'main_app:login' %}">Login</a>
     </div>
     <!-- album cover -->
     <img class="center" src="{% static 'tune_in/album_cover.jpg'%}">
@@ -225,7 +226,7 @@
                         // console.log(response.data[1].artist)
                         // console.log(response.data[1].month)
                         // console.log(response.data[1].day)
-                        this.music_info = response.data.sort((a, b) => Math.random() - 0.5).slice(0, 7)
+                        this.music_info = response.data.sort((a, b) => Math.random() - 0.5).slice(0, 5)
                         console.log(this.music_info)
                     })
                     // axios call for born on this date
@@ -244,7 +245,7 @@
             }
         })
     </script>
-    <script>gsap.to(".vinyl", { duration: 2, x: 300 });</script>
+    <script>gsap.to(".vinyl", { duration: 2, x: 1000 });</script>
     <!-- page footer -->
     <footer>
         <p>&copy 2020 Tune-In</p>

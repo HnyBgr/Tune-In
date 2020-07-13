@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="shortcut icon" type="image/ico" href="{% static 'tune_in/img/favicon.ico' %}">
+    <title>Log-In</title>
+    <style type="text/css">
+        .hero-image {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url("{% static 'tune_in/banner.jpg' %}");
+            ;
+            height: 50%;
+            background-position: 50% 25%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        body {
+            margin: 5px;
+            padding: 5px;
+            background-color: burlywood;
+        }
+
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            z-index: -1;
+        }
+
+        .welcome {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- banner -->
+    <div class="hero-image">
+        <!-- page title -->
+        <h1>Tune-In</h1>
+        <h1>Log-In</h1>
+    </div>
+    <p class="welcome">Please log-into you Tune-In account.</p>
+
+    <div class="container">
+        <form action="{% url 'main_app:login' %}" method="post">
+            {% csrf_token %}
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+            <label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label>
+            <button type="submit">login</button>
+        </form>
+    </div>
+
+
+    <!-- <button onclick="goBack()">Go Back</button> -->
+    <a href="javascript:javascript:history.go(-1)">Click here to go back to previous page</a>
+
+    <!-- page footer -->
+    <footer>
+        <p>&copy 2020 Tune-In</p>
+    </footer>
+</body>
+
+</html>
