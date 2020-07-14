@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +11,53 @@
     <title>Document</title>
 </head>
 <style>
-    .vinyl {
+    /* album cover */
+    /* .center {
+        display: flexbox;
+        margin-top: 100px; */
+        /* margin-left: auto;
+            margin-right: auto; */
+        /* width: 600px;
         height: 600px;
-        width: 800;
-    }
+        z-index: 1;
+        position: relative;
+        z-index: -1;
+
+    } */
+
+    /* .vinyl_pic {
+        display: flexbox;
+        margin-top: 100px; */
+        /* margin-left: auto;
+            margin-right: auto; */
+        /* width: 600px;
+        height: 600px;
+        z-index: 1;
+        position: relative;
+
+    } */
+
+    /* .album_vinyl {
+        display: flexbox;
+        width: 600px;
+        height: 600px;
+        position: relative;
+    } */
+
+    
 </style>
+
 <body>
-    <img class="vinyl" src="{% static 'tune_in/vinyl.jpg'%}">
+    <div class="album_vinyl">
+        <!-- album cover -->
+        <div class="album_cover">
+            <img class="center" src="{% static 'tune_in/album_cover.jpg'%}">
+        </div>
+        <div class="vinyl">
+            <img class="vinyl_pic" src="{% static 'tune_in/vinyl_1.jpg'%}">
+        </div>
+    </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
     <script src=" https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -31,9 +72,10 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-    <script>gsap.to(".vinyl", {duration: 2, x: 300});</script> 
-        
+    <script>gsap.to(".vinyl", { duration: 2, x: 300 });</script>
 
-    
+
+
 </body>
+
 </html>

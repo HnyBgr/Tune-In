@@ -22,6 +22,7 @@
             position: relative;
         }
 
+        /* Tune_In */
         h1 {
             margin: 5px;
             padding: 5px;
@@ -30,6 +31,7 @@
             text-shadow: 3px 3px darkgrey;
         }
 
+        /* Daily Music History */
         h2 {
             margin: 2px;
             padding: 5px;
@@ -44,27 +46,38 @@
             background-color: burlywood;
         }
 
+        .this_day {
+            margin: 5px;
+            padding: 5px;
+            text-align: center;
+            font-size: 50px;
+            text-shadow: 3px 3px darkgrey;
+        }
+
         /* album cover */
         .center {
             display: block;
             margin-top: 100px;
             /* margin-left: auto;
             margin-right: auto; */
-            width: 400px;
+            width: 600px;
+            height: 600px;
             z-index: 1;
             position: relative;
 
         }
 
-        .vinyl {
-            width: 400px;
+        .vinyl_pic {
+            width: 600px;
+            height: 600px;
             position: absolute;
             z-index: -1;
 
         }
 
         .album_vinyl {
-            width: 100%;
+            width: 600px;
+            height: 600px;
             position: relative;
         }
 
@@ -129,6 +142,7 @@
         <a href="{% url 'main_app:sign_up' %}">Sign Up</a>
         <a href="{% url 'main_app:login' %}">Login</a>
     </div>
+    <div id="this_day" class="this_day"></div>
     <div class="album_vinyl">
         <!-- album cover -->
         <div class="album_cover">
@@ -138,6 +152,7 @@
             <img class="vinyl_pic" src="{% static 'tune_in/vinyl_1.jpg'%}">
         </div>
     </div>
+
     <!-- div for vue -->
     <div id="app" class="center">
         <!-- div for dropdown menus and search button -->
@@ -197,9 +212,8 @@
             <button type="submit" v-on:click="getMusicData" class="btn badge-pill btn-secondary btn-sm">Search</button>
         </div>
         <!-- div with for loop over data to be displayed -->
-        <div class="on_this_day" v-for="item in music_info">[[item.day]] [[item.month]] </br>[[item.year]] -
-            [[item.artist]]</br>
-            [[item.description | striphtml]]
+        <div class="on_this_day" v-for="item in music_info">[[item.year]] - [[item.artist]]</br>
+            [[item.description]]
         </div>
     </div>
     <div class="top_page">
@@ -220,6 +234,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
     <!-- begin js code -->
     <script type="text/javascript">
+
+        let date = new Date();
+        let day = date.toLocaleString('en-us', { day: 'numeric' })
+        let longMonth = date.toLocaleString('en-us', { month: 'long' });
+        let today = `${day} ${longMonth}`;
+        this_day.innerText = today;
+        // let shortMonth = date.toLocaleString('en-us', { month: 'short' });
+        // console.log(day)
+        // console.log(shortMonth)
+        // console.log(longMonth)
+
 
         // start of vue js
         let app = new Vue({
@@ -251,7 +276,7 @@
                         // console.log(response.data[1].artist)
                         // console.log(response.data[1].month)
                         // console.log(response.data[1].day)
-                        let regex = ""
+
                         this.music_info = response.data.sort((a, b) => Math.random() - 0.5).slice(0, 5)
                         console.log(this.music_info)
                     })
@@ -263,14 +288,14 @@
                         // console.log(response.data[1].artist)
                         this.born_info = response.data.sort((a, b) => Math.random() - 0.5).slice(0, 10)
                     })
-                    function removeTags(str) {
-                        if ((str === null) || (str === ''))
-                            return false;
-                        else
-                            str = str.toString();
-                        return str.replace(/(<([^>]+)>)/ig, '');
-                    }
-                }
+                    // function removeTags(str) {
+                    //     if ((str === null) || (str === ''))
+                    //         return false;
+                    //     else
+                    //         str = str.toString();
+                    //     return str.replace(reg, <.+?> '');
+                    // }
+                },                
             },
             created: function () {
                 // this.getMusicData()
