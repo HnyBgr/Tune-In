@@ -56,28 +56,28 @@
 
         /* album cover */
         .center {
-            display: block;
-            margin-top: 100px;
-            /* margin-left: auto;
-            margin-right: auto; */
-            width: 600px;
-            height: 600px;
+            width: 750px;
+            height: 750px;
             z-index: 1;
-            position: relative;
+            position: absolute;
 
         }
 
+        /* record pic */
         .vinyl_pic {
-            width: 600px;
-            height: 600px;
+            margin-top: 25px;
+            width: 700px;
+            height: 700px;
             position: absolute;
             z-index: -1;
 
         }
 
+        /* div for both images */
         .album_vinyl {
-            width: 600px;
-            height: 600px;
+            margin: 100px;
+            width: 700px;
+            height: 700px;
             position: relative;
         }
 
@@ -101,7 +101,7 @@
         }
 
         .row {
-            margin: 2px;
+            margin: 5px;
             margin-right: 2px;
             text-align: center;
         }
@@ -115,6 +115,7 @@
             left: 0;
             bottom: 0;
             text-align: left;
+            z-index: 1;
         }
 
         footer {
@@ -140,9 +141,11 @@
     <!-- register hyperlink to sign-up page -->
     <div class="register">
         <a href="{% url 'main_app:sign_up' %}">Sign Up</a>
-        <a href="{% url 'main_app:login' %}">Login</a>
+        <a href="{% url 'main_app:login_user' %}">Login</a>
     </div>
+    <!-- displays the day and month -->
     <div id="this_day" class="this_day"></div>
+
     <div class="album_vinyl">
         <!-- album cover -->
         <div class="album_cover">
@@ -232,19 +235,18 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
+
     <!-- begin js code -->
     <script type="text/javascript">
-
+        // displays the day and month
         let date = new Date();
         let day = date.toLocaleString('en-us', { day: 'numeric' })
         let longMonth = date.toLocaleString('en-us', { month: 'long' });
         let today = `${day} ${longMonth}`;
         this_day.innerText = today;
-        // let shortMonth = date.toLocaleString('en-us', { month: 'short' });
         // console.log(day)
         // console.log(shortMonth)
         // console.log(longMonth)
-
 
         // start of vue js
         let app = new Vue({
@@ -253,11 +255,8 @@
             data: {
                 music_info: [],
                 born_info: [],
-                day: "",
-                month: "",
-                year: "",
-                artist: "",
-                description: "",
+                day: '',
+                month: '',
             },
             methods: {
                 getMusicData: function () {
@@ -279,6 +278,12 @@
 
                         this.music_info = response.data.sort((a, b) => Math.random() - 0.5).slice(0, 5)
                         console.log(this.music_info)
+                        for (let i = 0; i < this.music_info.length; i++) {
+                            this.music_info[i].description = this.removeTags(this.music_info[i].description)
+                            console.log()
+                        }
+
+
                     })
                     // axios call for born on this date
                     axios({
@@ -288,14 +293,11 @@
                         // console.log(response.data[1].artist)
                         this.born_info = response.data.sort((a, b) => Math.random() - 0.5).slice(0, 10)
                     })
-                    // function removeTags(str) {
-                    //     if ((str === null) || (str === ''))
-                    //         return false;
-                    //     else
-                    //         str = str.toString();
-                    //     return str.replace(reg, <.+?> '');
-                    // }
-                },                
+                },
+                // function to strip tags from the description being displayed
+                removeTags: function (str) {
+                    return str.replace(/(<([^>]+)>)/mig, '');
+                }
             },
             created: function () {
                 // this.getMusicData()

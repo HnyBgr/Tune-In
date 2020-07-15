@@ -48,13 +48,14 @@
         <h1>Tune-In</h1>
         <h1>Registration Page</h1>
     </div>
+    <!-- sign up statment and create an account statement -->
     <p class="welcome">Thank you for signing up for Tune-In. Your gateway to daily musical events and birthdays of your
         favorite artists and bands. Please enjoy the site.</p>
 
     <h2>Create an account below.</h2>
 
     <!-- <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button> -->
-
+    <!-- div containing form for sign up data with input fields -->
     <div id="id01" class="modal">
        
         <form action="{% url 'main_app:sign_up'%}" class="modal-content" method="post">
@@ -89,9 +90,7 @@
         </form>
     </div>
     <!-- <button onclick="goBack()">Go Back</button> -->
-    <a href="javascript:javascript:history.go(-1)">Click here to go back to previous page</a>
-
-    
+    <a href="javascript:javascript:history.go(-1)">Click here to go back to previous page</a>    
     <!-- page footer -->
     <footer>
         <p>&copy 2020 Tune-In</p>

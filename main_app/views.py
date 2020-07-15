@@ -1,15 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, reverse, get_object_or_404, reverse
 from django.http import HttpResponse
 from .models import MusicInfo
-from django.urls import reverse
+# from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
 
 # Create your views here.
-
-@login_required
-
 def index(request):
     this_day = MusicInfo.objects.order_by('day')
 
@@ -25,41 +23,38 @@ def index(request):
     }
     return render(request, 'main_app/index.html', data)
 
-
-
-def login(request):
+# view for login user
+def login_user(request):
     if request.method == 'POST':
 
         username = request.POST['username']
-        password = request.POST['password']
+        password = request.POST['psw']
 
-        user = authenticate(request, usename=username, password=password)
+        user = authenticate(request, username=username, password=password)
+        print(user)
+        if user is None:
+            return render(request, 'main_app/login_user.html', {'message': 'No user with that username and password'})
         
         login(request, user)
-
-        if 'next' in request.GET:
-            return HttpResponseRedirect(request.GET['next'])
-
-        return HttpResponseRedirect(reverse('main_app/index.html'))
-    return render(request, 'main_app/login.html')
-
-
+        return HttpResponseRedirect(reverse('main_app:index'))
+    return render(request, 'main_app/login_user.html')
+# view for sign up user
 def sign_up(request):
     if request.method == 'POST':
 
         username = request.POST['username']
         email = request.POST['email']
-        password = request.POST['password']
-        verify_password = request.POST['verify_password']
+        password = request.POST['psw']
+        verify_password = request.POST['psw-verify']
 
         if password != verify_password:
             return HttpResponse('Passwords do not match!')
 
         user = User.objects.create_user(username, email, password)
-        return HttpResponseRedirect(reverse('main_app/index.html'))
+        return HttpResponseRedirect(reverse('main_app:index'))
     
     return render(request, 'main_app/sign_up.html')
-
+# view to test animation
 def motion(request):
     return render(request, 'main_app/motion.html')
 
