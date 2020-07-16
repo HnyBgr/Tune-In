@@ -12,17 +12,34 @@ class Command(BaseCommand):
         
 
         time.sleep(random.randint(1, 10))
-
-        response = requests.get('https://www.thisdayinmusic.com/wp-json/tdim/v1/otd/7/1/', headers={'User-Agent': 'Mozilla/5.0'})
+        month = ""
+        day = ""
+        response = requests.get('https://www.thisdayinmusic.com/wp-json/tdim/v1/otd/' + month + '/' + day, headers={'User-Agent': 'Mozilla/5.0'})
         
         data = response.json()
+
         
         for entry in data:
-            day = entry['day']:
-            month = entry['month']:
-            year = entry['year']:
-            artist = entry['artist']:
-            description = entry['description']:
+            day = entry['day']
+            month = entry['month']
+            year = entry['year']
+            artist = entry['artist']
+            band = entry['band']
+            description = entry['description']
             # print(entry['artist'])
 
+            music_info = MusicInfo(
+                day=day,
+                month = month,
+                year = year,
+                artist = artist,
+                band = band,
+                description = description
+            )
+            music_info.save()
+
+
+
+        # for i, entry in enumerate(data):
+        #     print(str(i)+ '-'+str(entry))
        

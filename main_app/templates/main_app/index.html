@@ -212,7 +212,8 @@
                 <option value="12">Dec</option>
             </select>
             <!-- search button -->
-            <button type="submit" v-on:click="getMusicData" class="btn badge-pill btn-secondary btn-sm">Search</button>
+            <button id="get_record" type="submit" v-on:click="getMusicData"
+                class="btn badge-pill btn-secondary btn-sm">Search</button>
         </div>
         <!-- div with for loop over data to be displayed -->
         <div class="on_this_day" v-for="item in music_info">[[item.year]] - [[item.artist]]</br>
@@ -247,6 +248,7 @@
         // console.log(day)
         // console.log(shortMonth)
         // console.log(longMonth)
+        let get_record = document.querySelector("#get_record")
 
         // start of vue js
         let app = new Vue({
@@ -278,12 +280,11 @@
 
                         this.music_info = response.data.sort((a, b) => Math.random() - 0.5).slice(0, 5)
                         console.log(this.music_info)
+                        gsap.to(".vinyl_pic", { duration: 2, x: 1000, rotation: "+=360" });
                         for (let i = 0; i < this.music_info.length; i++) {
                             this.music_info[i].description = this.removeTags(this.music_info[i].description)
                             console.log()
                         }
-
-
                     })
                     // axios call for born on this date
                     axios({
@@ -297,16 +298,17 @@
                 // function to strip tags from the description being displayed
                 removeTags: function (str) {
                     return str.replace(/(<([^>]+)>)/mig, '');
-                }
+                },
+                // get_record.addEventListener("click", function () {
+                //     gsap.to(".vinyl_pic", { duration: 2, x: 1000, rotation: "+=360" });
+                // })
             },
             created: function () {
                 // this.getMusicData()
                 // this.getBornData()
             }
         })
-
     </script>
-    <script>gsap.to(".vinyl_pic", { duration: 2, x: 1000, rotation: "+=360" });</script>
     <!-- page footer -->
     <footer>
         <p>&copy 2020 Tune-In</p>
