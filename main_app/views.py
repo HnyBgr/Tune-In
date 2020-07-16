@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import MusicInfo
 # from django.urls import reverse
 from django.http import HttpResponseRedirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 
@@ -38,6 +38,12 @@ def login_user(request):
         login(request, user)
         return HttpResponseRedirect(reverse('main_app:index'))
     return render(request, 'main_app/login_user.html')
+
+# view for logout user
+def logout_user(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('main_app:index'))
+
 # view for sign up user
 def sign_up(request):
     if request.method == 'POST':
@@ -54,6 +60,7 @@ def sign_up(request):
         return HttpResponseRedirect(reverse('main_app:index'))
     
     return render(request, 'main_app/sign_up.html')
+    
 # view to test animation
 def motion(request):
     return render(request, 'main_app/motion.html')

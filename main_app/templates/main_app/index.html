@@ -163,10 +163,11 @@
     <div class="register">
         <a href="{% url 'main_app:sign_up' %}">Sign Up</a>
         <a href="{% url 'main_app:login_user' %}">Login</a>
+        <a href="{% url 'main_app:logout_user' %}">Logout</a>
+        <h4>Welcome, {{user.username}}</h4>
     </div>
     <!-- displays the day and month -->
     <div id="this_day" class="this_day"></div>
-    <h4>Welcome, {{user.username}}</h4>
     <!-- div for images -->
     <div class="album_vinyl">
         <!-- album cover -->
