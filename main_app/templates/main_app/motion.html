@@ -11,6 +11,14 @@
     <title>Document</title>
 </head>
 <style>
+    /* outer div */
+    .album_vinyl {
+        margin: 100px;
+        width: 700px;
+        height: 700px;
+        position: relative;        
+    }
+
     /* album cover */
     .center {
         width: 725px;
@@ -25,14 +33,7 @@
         height: 700px;
         position: absolute;
         z-index: -1;
-    }
-
-    /* outer div */
-    .album_vinyl {
-        margin: 100px;
-        width: 700px;
-        height: 700px;
-        position: relative;
+        backface-visibility: hidden;
     }
 </style>
 
@@ -48,8 +49,14 @@
         <div class="album_cover">
             <img class="center" src="{% static 'tune_in/album_cover.jpg'%}">
         </div>
-        <div class="vinyl">
-            <img class="vinyl_pic" src="{% static 'tune_in/vinyl.jpg'%}">
+        <div class="vinyl" ontouchstart="this.classList.toggle;">
+            <div>
+                <img class="vinyl_pic" src="{% static 'tune_in/vinyl.jpg'%}">
+            </div>
+            <div>
+                <img class="vinyl_pic" src="{% static 'tune_in/vinyl.jpg'%}">
+            </div>
+
         </div>
     </div>
     <button id="get_record" type="submit" v-on:click="getMusicData"
@@ -79,13 +86,6 @@
             gsap.to(".vinyl_pic", { duration: 2, x: 1000, rotation: "+=360" });
         })
 
-
-        // let t1 = gsap.to(".vinyl_pic", { x: 1000, rotation: "+=360" }.reversed(true));
-        // $(".submit").click(function () {
-        //     t1.reversed(!t1.reversed()
-
-        //     )
-        // })
     </script>
 
 

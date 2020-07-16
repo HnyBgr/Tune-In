@@ -39,7 +39,7 @@ class Command(BaseCommand):
             music_info.save()
 
 
-
-        # for i, entry in enumerate(data):
-        #     print(str(i)+ '-'+str(entry))
+        for key in music_info:
+            print('key')
+        
        
