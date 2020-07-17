@@ -65,13 +65,16 @@
             <div>
                 <img class="vinyl_pic" src="{% static 'tune_in/vinyl.jpg'%}">
             </div>
-
         </div>
     </div>
 
-    <div class="store_pic">
+    <!-- <div class="store_pic">
         <img class="lower_pic" src="{% static 'tune_in/record_store_pic.jpg' %}">
     </div>
+    <form action="{% url 'main_app:index' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Search for artist.." name="search">        
+    </form> -->
 
     <button id="get_record" type="submit" v-on:click="getMusicData"
         class="btn badge-pill btn-secondary btn-sm">Search</button>
