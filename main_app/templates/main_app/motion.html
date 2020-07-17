@@ -16,7 +16,7 @@
         margin: 100px;
         width: 700px;
         height: 700px;
-        position: relative;        
+        position: relative;
     }
 
     /* album cover */
@@ -34,6 +34,15 @@
         position: absolute;
         z-index: -1;
         backface-visibility: hidden;
+    }
+
+    .lower_pic {
+        height: 100%;
+        background-position: 50% 25%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: bottom;
+        /* position: relative; */
     }
 </style>
 
@@ -59,9 +68,14 @@
 
         </div>
     </div>
+
+    <div class="store_pic">
+        <img class="lower_pic" src="{% static 'tune_in/record_store_pic.jpg' %}">
+    </div>
+
     <button id="get_record" type="submit" v-on:click="getMusicData"
         class="btn badge-pill btn-secondary btn-sm">Search</button>
-
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
     <script src=" https://code.jquery.com/jquery-3.5.1.slim.min.js"

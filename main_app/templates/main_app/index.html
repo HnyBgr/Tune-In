@@ -14,8 +14,7 @@
         /* banner */
         .hero-image {
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url("{% static 'tune_in/banner.jpg' %}");
-            ;
+            url("{% static 'tune_in/banner.jpg' %}");            
             height: 50%;
             background-position: 50% 25%;
             background-repeat: no-repeat;
@@ -32,7 +31,7 @@
             text-shadow: 3px 3px darkgrey;
         }
 
-        /* day and month displayed */
+        /* Daily Music History */
         h2 {
             margin: 2px;
             padding: 5px;
@@ -46,14 +45,27 @@
             margin: 5px;
             padding: 5px;
             background-color: burlywood;
+            /* background-image: url("{% static 'tune_in/record_store_pic.jpg' %}");
+            height: 100%;
+            background-position: 50% 25%;
+            background-repeat: no-repeat;
+            background-size: auto;
+            background-position: bottom;
+            position: relative; */
         }
-
+        /* displays day and month */
         .this_day {
             margin: 5px;
             padding: 5px;
-            text-align: center;
+            text-align: right;
             font-size: 50px;
             text-shadow: 3px 3px darkgrey;
+        }
+        /* for the searched day and month */
+        .searched_day_month {
+            font-size: 1.5rem;
+            font-weight: bold;
+            /* text-shadow: 3px 3px darkgrey; */
         }
 
         /* div for both images */
@@ -61,15 +73,15 @@
             display: flex;
             justify-content: left;
             margin: 50px;
-            width: 200px;
-            height: 200px;
+            width: 100px;
+            height: 100px;
             position: relative;
         }
 
         /* album cover */
         .cover {
-            width: 225px;
-            height: 225px;
+            width: 125px;
+            height: 125px;
             z-index: 1;
             position: absolute;
 
@@ -78,8 +90,8 @@
         /* record pic */
         .vinyl_pic {
             margin-top: 25px;
-            width: 200px;
-            height: 200px;
+            width: 100px;
+            height: 100px;
             position: absolute;
             z-index: -1;
 
@@ -112,10 +124,14 @@
             font-size: 12px;
             margin: 15px;
         }
-        h4 {
+        .logged_in_user {
             margin: 5px;
+            padding: 10px;
+            text-align: right;
         }
-
+        .born_header {
+            margin: 35px;
+        }
 
         /* vue - dropdowns and search button */
         /* dropdowns */
@@ -128,8 +144,7 @@
 
         .btn {
             margin-right: 2px;
-        }
-
+        }        
         /* return to top of page anchor */
         .top_page {
             position: fixed;
@@ -158,16 +173,18 @@
         <!-- page title -->
         <h1>Tune-In</h1>
         <h2>Daily Music History</h2>
+        <!-- displays the day and month -->
+        <div id="this_day" class="this_day"></div>
     </div>
     <!-- register hyperlink to sign-up page -->
     <div class="register">
         <a href="{% url 'main_app:sign_up' %}">Sign Up</a>
         <a href="{% url 'main_app:login_user' %}">Login</a>
         <a href="{% url 'main_app:logout_user' %}">Logout</a>
-        <h4>Welcome, {{user.username}}</h4>
+        {% if user.is_authenticated %}
+        <h4 class="logged_in_user">Welcome, {{user.username}}</h4>
+        {% endif %}
     </div>
-    <!-- displays the day and month -->
-    <div id="this_day" class="this_day"></div>
     <!-- div for images -->
     <div class="album_vinyl">
         <!-- album cover -->
@@ -240,7 +257,8 @@
         </div>
         <div class="data_displays">
             <div>
-                <h4 v-if="music_info.length > 0"><b>Today in Music History</b></h4>                
+                <p class="searched_day_month">[[find_day]] [[find_month]]</p>                
+                <h4 v-if="music_info.length > 0"><b>Today in Music History</b></h4>
                 <!-- div with for loop over music history for that day to be displayed -->
                 <div class="on_this_day" v-for="item in music_info">
                     <b>[[item.year]] - [[item.artist]]</b></br>
@@ -248,7 +266,8 @@
                 </div>
             </div>
             <div>
-                <h4 v-if="music_info.length > 0"><b>Born on This Day</b></h4>
+                <!-- <p class="searched_day_month">[[find_day]] [[find_month]]</p> -->
+                <h4 class="born_header" v-if="music_info.length > 0"><b>Born on This Day</b></h4>
                 <!-- div with for loop over artists born that day to be displayed -->
                 <div class="born_on" v-for="item in born_info"><b>[[item.year]] - [[item.artist]]</b></br>
                     [[item.description]]
@@ -257,7 +276,7 @@
         </div>
     </div>
 
-    </div>
+    </div>    
     <div class="top_page">
         <a href="#top">Back to top of page</a>
     </div>
@@ -297,6 +316,11 @@
                 born_info: [],
                 day: '',
                 month: '',
+                find_day:'',
+                find_month: '',
+                display_month: [
+                    "", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+                ]
             },
             methods: {
                 getMusicData: function () {
@@ -317,12 +341,16 @@
                         // console.log(response.data[1].day)
 
                         this.music_info = response.data.sort((a, b) => Math.random() - 0.5).slice(0, 5)
+                        this.find_day = this.music_info[0].day
+                        this.find_month = this.display_month[this.music_info[0].month]
+                        console.log(this.find_month)
                         
                         // console.log(this.music_info)
                         for (let i = 0; i < this.music_info.length; i++) {
                             this.music_info[i].description = this.removeTags(this.music_info[i].description)
                             // console.log()
-                            gsap.to(".vinyl_pic", { duration: 2, x: 1600, rotation: "+=360" });
+                            let x = window.innerWidth
+                            gsap.to(".vinyl_pic", { duration: 2, x: x-250, rotation: "+=360" });
                         }
                     })
                     // axios call for born on this date
@@ -347,6 +375,7 @@
                 // this.getBornData()
             }
         })
+        console.log(window.innerWidth)
     </script>
     <!-- page footer -->
     <footer>
